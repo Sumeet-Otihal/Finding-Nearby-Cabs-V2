@@ -7,6 +7,7 @@ A web application to find nearby cabs based on user location using Flask, Leafle
 ✅ Detect current location automatically<br>
 ✅ Display cab locations on an interactive map<br>
 ✅ Show driver details and contact info<br>
+✅ Get recommended to the nearest cab (Confirm or reject it!)<br>
 ✅ Clear search and reset map easily<br>
 
 🛠️ Technologies Used<br>
