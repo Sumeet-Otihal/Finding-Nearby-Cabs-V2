@@ -1,6 +1,6 @@
 🚖 Nearby Cabs Finder<br>
 A web application to find nearby cabs based on user location using Flask, Leaflet.js, and OpenStreetMap.<br>
-![Screenshot 2025-03-06 202358](https://github.com/user-attachments/assets/35e2d8a2-9434-44c7-910f-4e399bd7402c)
+![Screenshot 2025-03-06 235123](https://github.com/user-attachments/assets/0c470f64-ccc3-4bc1-bbe3-41ec03ca614a)
 <br>
 📌 Features<br>
 ✅ Search for cabs by entering a city or address<br>
