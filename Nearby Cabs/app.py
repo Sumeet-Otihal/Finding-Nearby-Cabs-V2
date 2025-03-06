@@ -13,27 +13,39 @@ def home():
 @app.route('/find_cabs', methods=['POST'])
 def find_cabs():
     data = request.json
-    lat, lon = get_coordinates(data.get("location"))
+    location = data.get("location")
 
+    lat, lon = get_coordinates(location)
     if lat is None or lon is None:
-        return jsonify({"result": "Invalid location.", "cabs": []})
+        return jsonify({"result": "❌ Invalid location.", "cabs": []})
 
     cabs = search_cabs(lat, lon)
     if not cabs:
-        return jsonify({"result": "No nearby cabs available within 100 km.", "cabs": []})
+        return jsonify({"result": "❌ No nearby cabs available within 100 km.", "cabs": []})
 
-    result = "\n".join([f"Name: {cab['name']}\nDriver ID: {cab['id']}\nPhone: {cab['phone']}\nDistance: {cab['distance']:.2f} km\n"
+    for cab in cabs:
+        cab["estimated_fare"] = round(cab["distance"] * 15, 2)  # ₹15 per km
+        cab["estimated_time"] = round(cab["distance"] / 40, 1)  # Avg speed 40 km/h
+
+    # Find the nearest cab
+    nearest_cab = min(cabs, key=lambda cab: cab['distance'])
+
+    result = "\n".join([f"👨‍✈️ Name: {cab['name']}\n"
+                         f"🆔 Driver ID: {cab['id']}\n"
+                         f"📞 Phone: {cab['phone']}\n"
+                         f"📏 Distance: {cab['distance']:.2f} km\n"
+                         f"⏳ Estimated Time: {cab['estimated_time']} hrs\n"
+                         f"💰 Estimated Fare: ₹{cab['estimated_fare']}\n"
                          "--------------------------" for cab in cabs])
-    
-    return jsonify({"result": result, "cabs": cabs})
+
+    return jsonify({"result": result, "cabs": cabs, "recommended_cab": nearest_cab})
 
 
-import requests
 
 def get_coordinates(location):
     """Fetch coordinates from OpenStreetMap if a city name is provided."""
     headers = {
-        "User-Agent": "YourAppName/1.0 (E-mail)"  # Use a valid email
+        "User-Agent": "MyCabFinderApp/1.0 (cabfinder50@gmail.com)"  # Use a valid email
     }
     
     try:
@@ -69,7 +81,7 @@ def distance(lat1, lon1, lat2, lon2):
     return alpha * RADIUS_EARTH
 
 def search_cabs(lat, lon):
-    """Search for nearby cabs and return structured JSON with coordinates."""
+    """Search for nearby cabs, sort by distance, and return structured JSON."""
     cabs = []
     
     try:
@@ -77,22 +89,29 @@ def search_cabs(lat, lon):
             for line in file:
                 details = line.strip().split()
                 if len(details) >= 5:
+                    driver_id = details[0]
                     driver_lat, driver_lon = float(details[1]), float(details[2])
+                    driver_name, driver_phone = details[3], details[4]
+                    
                     d = distance(lat, lon, driver_lat, driver_lon)
                     if d <= 100.0:
                         cabs.append({
-                            "id": details[0],
+                            "id": driver_id,
                             "lat": driver_lat,
                             "lon": driver_lon,
-                            "name": details[3],
-                            "phone": details[4],
+                            "name": driver_name,
+                            "phone": driver_phone,
                             "distance": d
                         })
 
+        # ✅ Sort cabs by distance (smallest to largest)
+        cabs.sort(key=lambda cab: cab["distance"])
         return cabs
+
     except Exception as e:
         print(f"Error: {e}")
         return []
+
 
 
 if __name__ == '__main__':
