@@ -25,7 +25,6 @@ NOTE: Make changes in the index.html file before execution to resolve error 403 
 <br>
 📜 API Usage<br>
 This app uses:<br>
-
 OpenStreetMap (Nominatim API) for geolocation<br>
 Custom Flask API to fetch cab data<br>
 <br>
