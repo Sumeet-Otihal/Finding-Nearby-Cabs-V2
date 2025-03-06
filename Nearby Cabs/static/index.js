@@ -129,7 +129,7 @@ let map = L.map('map').setView([20.5937, 78.9629], 5);
 
                 try {
                     let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`, {
-                        headers: { "User-Agent": "MyCabFinderApp/1.0 (cabfinder50@gmail.com)" } //Make changes here
+                        headers: { "User-Agent": "YourAppName/1.0 (Enter a valid E-mail here)" } //Make changes here
                     });
                     let data = await response.json();
                     let detectedLocation = data.display_name || "Your location";
@@ -151,7 +151,7 @@ let map = L.map('map').setView([20.5937, 78.9629], 5);
         const { lat, lng } = e.latlng;
         try {
             let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`, {
-                headers: { "User-Agent": "MyCabFinderApp/1.0 (cabfinder50@gmail.com)" } //Make changes here
+                headers: { "User-Agent": "YourAppName/1.0 (Enter a valid E-mail here)" } //Make changes here
             });
             let data = await response.json();
             let selectedLocation = data.display_name || `${lat}, ${lng}`;
