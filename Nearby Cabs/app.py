@@ -40,8 +40,6 @@ def find_cabs():
 
     return jsonify({"result": result, "cabs": cabs, "recommended_cab": nearest_cab})
 
-
-
 def get_coordinates(location):
     """Fetch coordinates from OpenStreetMap if a city name is provided."""
     headers = {
@@ -111,8 +109,6 @@ def search_cabs(lat, lon):
     except Exception as e:
         print(f"Error: {e}")
         return []
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
