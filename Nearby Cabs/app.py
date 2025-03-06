@@ -33,7 +33,7 @@ import requests
 def get_coordinates(location):
     """Fetch coordinates from OpenStreetMap if a city name is provided."""
     headers = {
-        "User-Agent": "MyCabFinderApp/1.0 (cabfinder50@gmail.com)"  # Use a valid email
+        "User-Agent": "YourAppName/1.0 (E-mail)"  # Use a valid email
     }
     
     try:
