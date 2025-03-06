@@ -16,6 +16,7 @@ Mapping: Leaflet.js, OpenStreetMap API
 Geolocation: Nominatim API
 
 🗺️ How It Works
+NOTE: Make changes in the index.html file before execution to resolve error 403 i.e. OpenStreetMap’s Nominatim API blocks requests from scripts that don’t include a proper User-Agent header.
 1️⃣ Enter a city or address in the input field.
 2️⃣ Click Find Cabs to search for nearby cabs.
 3️⃣ Click 📍 to detect your current location.
