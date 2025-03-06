@@ -157,7 +157,7 @@
 
                 try {
                     let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`, {
-                        headers: { "User-Agent": "MyCabFinderApp/1.0 (cabfinder50@gmail.com)" }
+                        headers: { "User-Agent": "YourAppName/1.0 (A Valid E-mail Address)" } //Make changes here
                     });
                     let data = await response.json();
                     let detectedLocation = data.display_name || "Your location";
@@ -179,7 +179,7 @@
         const { lat, lng } = e.latlng;
         try {
             let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`, {
-                headers: { "User-Agent": "MyCabFinderApp/1.0 (cabfinder50@gmail.com)" }
+                headers: { "User-Agent": "YourAppName/1.0 (A Valid E-mail Address)" } //Make changes here
             });
             let data = await response.json();
             let selectedLocation = data.display_name || `${lat}, ${lng}`;
